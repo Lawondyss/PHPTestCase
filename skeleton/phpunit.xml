@@ -24,9 +24,9 @@
 
 	<!--
 	<listeners>
-			<listener class="Application_Test_TestTimesListener" 
-							file="./libs/PHPTestCase/framework/PHPUnit/Listeners/TestTimesLimitListener.php">
-			</listener>
+		<listener class="Application_Test_TestTimesListener"
+			file="./listeners/TestTimesLimitListener.php">
+		</listener>
 	</listeners>
 	-->
 </phpunit>
