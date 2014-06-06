@@ -1,0 +1,5 @@
+.DS_Storage
+.idea
+
+vendor
+composer.lock
