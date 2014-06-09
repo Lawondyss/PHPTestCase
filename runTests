@@ -7,31 +7,34 @@
 define('TEMP_DIR', __DIR__. '/temp');
 // PHPUnit tests
 define('TESTS_DIR', __DIR__ . '/../../../tests');
-// directory with the application
+// directory with the application, for only selenium test set the directory on FALSE
 define('APP_DIR', __DIR__ . '/../../../app');
 // file for composer autoload
 define('COMPOSER_AUTOLOAD', __DIR__ . '/../../autoload.php');
 
-var_dump(realpath(COMPOSER_AUTOLOAD));
+
 if (realpath(COMPOSER_AUTOLOAD) === false) {
-	die;
+	die ('Please install dependencies via Composer.');
 }
 
 if (realpath(TEMP_DIR) === false) {
-	mkdir(TEMP_DIR);
+	if (!mkdir(TEMP_DIR)) {
+		die ('Please make the  writable temporary directory in path: ' . TEMP_DIR);
+	}
 }
 
 if (realpath(TESTS_DIR) === false) {
-	die(
+	die (
 		'The tests are expected in the directory: ' . TESTS_DIR . PHP_EOL .
 		'If are in a different directory, set the path to him in constant TESTS_DIR in the file runTests.' . PHP_EOL
 	);
 }
 
-if (realpath(APP_DIR) === false) {
-	die(
+if (APP_DIR !== false && realpath(APP_DIR) === false) {
+	die (
 		'The application are expected in the directory: ' . APP_DIR . PHP_EOL .
-		'If are in a different directory, set the path to him in constant APP_DIR in the file runTests.' . PHP_EOL
+		'If are in a different directory, set the path to him in constant APP_DIR in the file runTests.' . PHP_EOL .
+		'If it\'s only selenium tests, set the constant APP_DIR on FALSE.' . PHP_EOL
 	);
 }
 
