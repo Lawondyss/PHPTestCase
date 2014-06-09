@@ -10,10 +10,24 @@
 	"bin": [
 		"runTests"
 	],
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "chibimagic/webdriver-php",
+				"version": "dev-master",
+				"source": {
+					"type": "git",
+					"url": "https://github.com/chibimagic/WebDriver-PHP",
+					"reference": "master"
+				}
+			}
+		}
+	],
 	"require": {
 		"phpunit/phpunit": "4.1.1",
 		"phpunit/phpunit-selenium": "1.3.3",
-		"facebook/webdriver": "dev-master",
+		"chibimagic/webdriver-php": "dev-master",
 		"se/selenium-server-standalone": "v2.42.2",
 		"nette/robot-loader": "v2.2.1"
 	}
