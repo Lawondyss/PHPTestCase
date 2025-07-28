@@ -1,4 +1,4 @@
-Vytvořeno v { DeveloperHub
+Vytvoreno v DeveloperHub
 
 PHPTestCase
 =============
@@ -7,49 +7,48 @@ PHPTestCase
 
 Instalace PHPTestCase
 -----------------------
-* naklonovani externiho repozitare
-	$ git submodule add http://github.com/DeveloperHub/PHPTestCase.git libs/PHPTestCase
-* v rootu projektu se vytvori sobor .gitmodules, ktery predstavuje konfiguracni soubor, v nemz je ulozeno mapovani
-	mezi adresou URL projektu a lokalnim podadresarem PHPTestCase
-* hostujici projekt je nyni povysen na "super projekt"
-* pri klonovani je sice ziskan .gitmodules, ale ne jeho data, je potreba je stahnout
-	* $ git submodule init = inicializace lokalniho konfiguracniho souboru
-	* $ git submodule update = vyzvednuti vsech dat
-* ve skeletonu v adresarich unit a selen jsou v souborech readme pripraveny ukazkove tridy testu
-
+* klonovani externiho repozitare
+    $ git submodule add http://github.com/Lawondyss/PHPTestCase.git libs/PHPTestCase
+* v rootu projektu se vytvori soubor .gitmodules, ktery predstavuje konfig. soubor se
+  zpracovanim mapovani mezi URL repozitare a lokalnim adresarem PHPTestCase
+* hostingovy projekt je nyni povysen na "super projekt"
+* pri klonovani je sice ziskan .gitmodules, ale ne jeho obsah
+    * $ git submodule init   # inicializuje lokalni konfiguracni soubor
+    * $ git submodule update # stahne podmoduly
+* ve skeletonu v adresarich unit a selen maji readme ukazkove tridy testu
 
 Nastaveni
-=========
-* obsah adresare skeleton/ prekopirujte do rootu Vasi aplikace
-* ziskate 
-	* phpunit.xml - konfigurace phpunit
-	* tests/ 
-		* case/ 
-			* selen/ - adresar pro selen testy
-			* unit/ - adresar pro integracni a jednotkove testy
-		* coverage/ - adresar pro coverage report
-		* libs/ - adresar pro tridy tretich stran, nebo jejich uzpusobeni, nebo Vase, ktere vyuzijete jen v testech
-		* run.php - spoustec NetteTestCase a PHPUnit frameworku
+==========
+* obsah adresare skeleton/ prekopirujte do rootu Vase aplikace
+* ziskate:
+    * phpunit.xml    - konfigurace PHPUnit
+    * tests/
+        * case/
+            * selen/   - adresar pro selen testy
+            * unit/    - adresar pro integracni a jednotkove testy
+        * coverage/       - adresar pro coverage report
+        * libs/           - adresar pro tridy tretich stran ci jejich upravy (pouzite pouze v testech)
+    * runTests        - skript pro spusteni PHPUnit a NetteTestCase
 
 Spousteni integracnich a jednotkovych testu
 ===========================================
-* $ php tests/run.php
-	* bez parametru se spusti vsechny testy
-	* s parametrem --group unit pouze unit testy
-* pokud pouzivate pre-commit, automaticky se spousteji testy pouze ve skupine unit
-
+* z rootu projektu spustte:
+    $ ./runTests
+    * bez parametru se spusti vsechny testy
+    * s parametrem --group unit se spusti jen unit testy
+* pokud pouzivate pre-commit hook, automaticky se spuštěji testy pouze ve skupine unit
 
 Spousteni testu pred provedenim prikazu git commit
 ==================================================
-* prekopirujte z libs/PHPTestCase/framework/Hooks/pre-commit do .git/hooks/
-* muzete nsatavit urcitou skupinu testu, ktera se ma spoustet pri commitu
+* nakopirujte soubor libs/PHPTestCase/git-hooks/pre-commit (nebo pre-commit.php) do .git/hooks/
+* muzete nastavit, ktere testy se maji spustit pri commitu
 * muzete nastavit cestu k PHP
-* git commit 
-	* spusti PHPUnit na testech
-	* pri uspesnem probehnuti testu se provede git commit
-	* pri neuspesnem probehnuti testu se git commit neprovede
+* pri git commit:
+    * spusti PHPUnit
+    * pokud projdou testy, commit pokracuje
+    * pokud ne, commit se zastavi
 
 Poznamky k nastaveni phpunit.xml
 ================================
 * listeners
-	* Application_Test_TestTimeListener - po odkomentovani hlida max. 2s delku behu jednoho testu
+    * Application_Test_TestTimesListener - po odkomentovani hlida max. 2s delku behu jednoho testu
